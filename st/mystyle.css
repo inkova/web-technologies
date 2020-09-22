@@ -12,8 +12,8 @@ h1.squeeze {text-decoration: underline; animation-name: squeeze;}
 
 /* left menu */
 .left_menu {float:left; position: fixed; width:20%;}
-.section li {text-decoration: none; background: #F0E68C; color: #8B4513; border: 1px #FFD700 solid; border-radius: 5%; text-align: left; display: block; width: 12vw; height: 30pt; line-height: 30pt; margin-bottom: 5px;}
-.section li:hover{background: #B8860B; color: white;}
+.left_menu li {text-decoration: none; background: #F0E68C; color: #8B4513; border: 1px #FFD700 solid; border-radius: 5%; text-align: left; display: block; width: 12vw; height: 30pt; line-height: 30pt; margin-bottom: 5px;}
+.left_menu li:hover{background: #B8860B; color: white;}
 
 /* main part*/
 .main_part {float:right; width:80%; font-size: 16 px;} 
