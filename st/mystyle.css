@@ -1,0 +1,31 @@
+/* top */
+.top{text-align: center}
+.animated:hover {animation-duration: 2.5s; animation-fill-mode: both; animation-iteration-count: infinite; cursor:pointer;}
+@keyframes squeeze {
+  0% {transform: scale(1);}
+  30% {transform: scaleX(1.15) scaleY(0.75);}
+  40% {transform: scaleX(0.75) scaleY(1.25);}
+  60% {transform: scaleX(1.15) scaleY(0.85);}
+  100% {transform: scale(1);}
+}
+h1.squeeze {text-decoration: underline; animation-name: squeeze;}
+
+/* left menu */
+.left_menu {float:left; position: fixed; width:20%;}
+.section li {text-decoration: none; background: #F0E68C; color: #8B4513; border: 1px #FFD700 solid; border-radius: 5%; text-align: left; display: block; width: 12vw; height: 30pt; line-height: 30pt; margin-bottom: 5px;}
+.section li:hover{background: #B8860B; color: white;}
+
+/* main part*/
+.main_part {float:right; width:80%; font-size: 16 px;} 
+.general_info{font-size: large}
+.left {float: left; padding: 0 20px 10px 0;}
+
+.short_info {font-size: 0.9em; color: rgb(109, 109, 109)}
+.short_info>h2 {color: black;}
+
+.characteristic {padding: 10px 0 10px 40px;}
+table, th, td {border: 1px solid #A0522D; padding: 10px;}
+table {border-collapse: collapse;}
+th {text-align: left;}
+
+.basic_moments  {font-size: 6mm}
