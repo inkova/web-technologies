@@ -1,0 +1,129 @@
+<script>
+"use strict";
+
+console.log("Hello! Everything is good. I start work..");
+
+let valid_code=`
+#include<cstdio>
+// Однострочный комментарий
+int main(int argc, char**argv) {
+	// Ещё один однострочный комментарий
+	/* Многострочный комментарий
+...
+**
+*/
+	printf("shielding in format of print \\"'// comment\\\\n\\"\\n");
+	printf("'/* comment */'\\n");
+	// Однострочный коментарий /* ... 
+	return 0;
+}
+`;
+
+
+ function delete_one_line_comment(str, j ,len){
+	let sim = str[j];
+	while (sim != '\n' && j < len) { 	  
+ 	  j++;
+	  sim = str[j];
+	}
+	return j;
+} 
+
+ function delete_n_line_comment(str, j ,len){
+	let att =0;
+     	let sim = ' ';
+	for (; j < len; j++) 
+	{ 
+	  sim = str[j];
+	  if(att === 0){
+       	if(sim === '*'){
+         		 att =1;
+
+       	}	
+	  }
+	  else if(att === 1){
+		if(sim === '/')
+		{
+           	j++; 
+			return j; 
+		}
+ 		else {att =0;} 
+	  }
+	}
+} 
+
+function format_of_print(str, j ,len, quot){
+	let att = 0;
+     	let sim = ' ';
+	let part_res = "";
+	for (; j < len; j++) 
+	{ 
+	  sim = str[j];
+	 if(att === 0){
+       	if(sim === '\\'){
+			att =1;
+		}
+		else if (sim === quot){
+			part_res+=sim;
+         		return part_res; 
+       	}
+		part_res+=sim;
+	  }
+	  
+	  else
+	  {
+		part_res+=sim; 
+		att =0;
+	  } 
+	}
+} 
+
+ function stripcomments(str){
+    
+    	let n = str.length;
+	let ch = ' ';
+	let res = "";
+	let pr = "";
+	let attention =0;
+ 	for (let i = 0; i < n; i++) 
+	{ 
+	  ch = str[i];
+	  if(attention === 0){
+       	if(ch === '/'){
+         		 attention =1;
+       	}
+		else if(ch === "'" || ch === '"' || ch === '`'){
+			res +=ch; 
+			i++;
+			pr= format_of_print(str,i,n,ch);
+			res+=pr;
+			i=i + pr.length -1;
+		}
+	 	else { res +=ch; }
+	  }
+	  else if(attention === 1){
+		if(ch === '/')
+		{
+           	i++;
+			i=delete_one_line_comment(str, i, n);
+			attention =0;
+		}
+     		else if(ch === '*')
+		{
+           	i++;
+			i=delete_n_line_comment(str, i, n);
+			attention =0;
+     		}
+     		else
+		{
+		  	res= res + '/' + ch;
+		  	attention =0;
+		}
+	   }
+	}
+    	return res;
+} 
+
+console.log(stripcomments(valid_code));
+
+</script>
