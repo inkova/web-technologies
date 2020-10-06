@@ -1,0 +1,93 @@
+<script>
+"use strict";
+class Animal {
+  constructor(name) {
+    this.name = name;
+    this.speed = 0; // все животные передвигаются с какой-то скоростью
+    this.position = 0;
+    this.endurance = 0; //у всех животных разная выносливость
+    this.fullness = 0; // все животные едят. Значит имют сытость
+    this.alive = 1; // животное либо живое=1, либо мертвое=0
+    this.sound= " "; //животные издают звуки
+
+  }
+  move(time) { // когда животные передвигаются с какой-то скоростью, оно меняет положение и теряет сытость
+    if(this.alive===0){
+      console.log("Sorry, %s can't do anything. %s is dead", this.name, this.name);
+      return;
+     }
+    for (let i = 0; i < time; i++){ 
+	this.position += this.speed;
+     this.fullness -= this.endurance; 
+	if (this.fullness < 0) {
+	   this.alive = 0;
+	   console.log("Sorry, %s died", this.name)
+	   return;
+	} //если долго бежать, не кушая, то можно умереть
+    }
+    console.log("%s position is %d, fullness is %d", this.name, this.position, this.fullness)   
+  }
+  feed(food) { //от еды получаем сытость, но есть бесконечно мы не можем
+    if(this.alive===0){
+      console.log("Sorry, %s can't do anything. %s is dead", this.name, this.name);
+      return;
+     }  
+   this.fullness += food;
+   if (this.fullness>100) {this.fullness = 100;}
+   console.log("%s fullness is %d", this.name, this.fullness)   
+  }
+  speak() {
+    if(this.alive===0){
+      console.log("Sorry, %s can't do anything. %s is dead", this.name, this.name);
+      return;
+     }  
+    console.log(this.sound)
+  }
+
+}
+
+// Наследуем от Animal собаку
+class Dog extends Animal {
+   constructor(name) {
+     super(name);
+     this.speed = 10; 
+     this.endurance = 0.1;
+     this.sound= "WOF! WOF!"; 
+   }
+}
+
+// Наследуем от Animal кошку
+class Cat extends Animal {
+   constructor(name) {
+     super(name);
+     this.speed = 5; 
+     this.endurance = 0.4;
+     this.sound= "Mrr... Mau..."; 
+   }
+
+}
+
+let buried = {
+  rip: "RIP"
+};
+
+let dog = new Dog("Lu");
+let cat = new Cat("Kis-Ris");
+
+
+dog.feed(110);
+dog.move(5); 
+dog.speak();  
+dog.move(20000); 
+
+cat.feed(1); 
+cat.speak();   
+cat.move(100); 
+cat.speak();
+
+console.log("All my animals have died, they must be buried");
+Object.setPrototypeOf(Animal.prototype, buried);
+cat.rip="rest in peace my dear cat";
+console.log(cat.rip)
+console.log(dog.rip)
+</script>
