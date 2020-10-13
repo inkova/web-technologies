@@ -7,10 +7,9 @@ async function get_words_1(str){
   }
 
 async function get_words_2(str){
-    return new Promise((resolve) => {
-          setTimeout(() => {str= str+'a';}, 500);
-          resolve(str);
-    });
+    str= str+'a';
+    return str;
+    
 }
 
 (async () => {
