@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<script>
+'use strict';
+async function get_words_1(str){
+     str=str+'bbb';
+     return str;
+  }
+
+async function get_words_2(str){
+    return new Promise((resolve) => {
+          setTimeout(() => {str= str+'a';}, 500);
+          resolve(str);
+    });
+}
+
+(async () => {
+let response = await fetch('basa.txt');
+let text = await response.text(); 
+console.log(text);
+
+let timerId_1 = setInterval(() => 
+{
+     get_words_1(text).then(result => {text=result;});   
+	console.log('tick - %s', text);
+}, 1000);
+
+let timerId_2 = setInterval(() => 
+{
+   get_words_2(text).then(result => {text=result;});
+   console.log('tack - %s', text);
+
+}, 3000);
+
+setTimeout(() => { 
+clearInterval(timerId_1); 
+clearInterval(timerId_2);
+console.log('stop'); 
+}, 12010);
+
+
+})()
+
+</script>
