@@ -9,70 +9,71 @@ input {margin: 10px;}
 
 </style>
 <body>
-<h1 id="custom">РџРѕР·РІРѕРЅРёС‚Рµ!</h1>
-<input id="stop" type="button" value="РџСЂРµРєСЂР°С‚РёС‚СЊ Р·РІРѕРЅРёС‚СЊ!" onclick="clearInterval(timerId)">
+<h1 id="custom">Позвоните!</h1>
+<input id="stop" type="button" value="Прекратить звонить!" onclick="clearInterval(timerId)">
 <br>
 <img src="http://www.mforum.ru/cmsbin/2009/18/FOTO_7210/DSC04784_full640x480.jpg" id="change_image"> 
 <br>
-<input id="change" type="button" value="РЎРјРµРЅРёС‚СЊ РєР°СЂС‚РёРЅРєСѓ">
+<input id="change" type="button" value="Сменить картинку">
 
   <table id="idTable">
     <tr>
-      <th colspan="3">РўРµР»РµС„РѕРЅ <em>РќР°Р¶РјРё РЅР° РјРѕРё РєРЅРѕРїРєРё</em>:
-      </th>
+      <th colspan="3">Телефон <em>Нажми на мои кнопки</em>:        </th>
     </tr>
     <tr>
       <td><strong>1</strong>
         <br>.,!
       </td>
       <td class="n"><strong>2</strong>
-        <br>РђР‘Р’Р“
-        <br>РЎС‡С‘С‚С‡РёРє: <input type="button" value="1" data-counter>
+        <br>АБВГ
+        <br>Счётчик: <input type="button" value="1" data-counter>
       </td>
       <td><strong>3</strong>
-        <br>Р”Р•Р–Р—
+        <br>ДЕЖЗ
       </td>
     </tr>
     <tr>
       <td><strong>4</strong>
-        <br>РР™РљР›
+        <br>ИЙКЛ
       </td>
       <td onclick="event.stopPropagation()"><strong>5</strong>
-        <br>Р‘Р»РѕРєРёСЂРѕРІРєР° РІРїР»С‹РІР°РЅРёСЏ
+        <br>Блокировка вплывания
       </td>
       <td class="e"><strong>6</strong>
-        <br>Р РЎРўРЈ
+        <br>РСТУ
       </td>
     </tr>
     <tr>
       <td><strong>7</strong>
-        <br>Р¤РҐР¦Р§
+        <br>ФХЦЧ
       </td>
       <td><strong>8</strong>
-        <br>РЁР©РЄР«
+        <br>ШЩЪЫ
       </td>
       <td><strong>9</strong>
-        <br>Р¬Р­Р®РЇ
+        <br>ЬЭЮЯ
       </td>
     </tr>
 
   </table>
-  <input id="clear" type="button" value="РћС‡РёСЃС‚РёС‚СЊ!">
-  <input id="replace" type="button" value="Р—Р°РјРµРЅРёС‚СЊ!">
+  <input id="clear" type="button" value="Очистить!">
+  <input id="replace" type="button" value="Заменить!">
 
   <div id="text">
   </div>
 
   <script>
 
-// СЃРѕР·РґР°РЅРёРµ, РІС‹Р·РѕРІ Рё РѕР±СЂР°Р±РѕС‚РєР° СЃРІРѕРµРіРѕ СЃРѕР±С‹С‚РёСЏ call
-    cll=new CustomEvent("call", {detail: { phrase: "ГЏГ®Г§ГўГ®Г­ГЁГІГҐ!" }});
-    custom.addEventListener("call", function(event) {
+// создание, вызов и обработка своего события call
+    let pCustom = document.getElementById('custom');
+
+    cll=new CustomEvent("call", {detail: { phrase: "Звоню!" }});
+    pCustom.addEventListener("call", function(event) {
       alert(event.detail.phrase);
     });
     let timerId = setInterval(() => custom.dispatchEvent(cll), 5000); 
 
-//СЂР°Р±РѕС‚Р° СЃ event.target, РґРµР»РёРіРёСЂРѕРІР°РЅРёРµ РѕР±СЂР°Р±РѕС‚РєРё
+//работа с event.target, делигирование обработки
     let table = document.getElementById('idTable');
     let selectedTd;
 
@@ -95,41 +96,50 @@ input {margin: 10px;}
       selectedTd.classList.add('highlight');
     }
 
-//РћРґРЅРѕСЂР°Р·РѕРІРѕРµ СЃРѕР±С‹С‚РёРµ
+//Одноразовое событие
 document.addEventListener("click", function(event) {
     if (event.target.dataset.counter != undefined) { 
       event.target.value++;
     }
   }, {once: true});
  
-// СЂРµР°Р»РёР·Р°С†РёСЏ capture true/false; Р Р°Р±РѕС‚Р° СЃ innerHTML, РґРѕР±Р°РІР»РµРЅРёРµ
+let pText = document.getElementById("text");
+
+// реализация capture true/false; Работа с innerHTML, добавление
 for(let elem of table.querySelectorAll('*')) {
-    elem.addEventListener("click", e => text.innerHTML = text.innerHTML +"РџРѕРіСЂСѓР¶РµРЅРёРµ:" + elem.tagName + "<br>", true);
-    elem.addEventListener("click", e => text.innerHTML = text.innerHTML +"Р’СЃРїР»С‹С‚РёРµ:" + elem.tagName + "<br>"); 
+    elem.addEventListener("click", e => pText.innerHTML = pText.innerHTML +"Погружение:" + elem.tagName + "<br>", {capture: true});
+    elem.addEventListener("click", e => pText.innerHTML = pText.innerHTML +"Всплытие:" + elem.tagName + "<br>"); 
   }
  
-//Р Р°Р±РѕС‚Р° СЃ innerHTML, СѓРґР°Р»РµРЅРёРµ
-clear.onclick = function(e) {
-    text.innerHTML = " ";
+//Работа с innerHTML, удаление
+let pClear = document.getElementById('clear');
+pClear.onclick = function(e) {
+    pText.innerHTML = " ";
   };
 
-//Р Р°Р±РѕС‚Р° СЃ innerHTML, Р·Р°РјРµС‰РµРЅРёРµ
-replace.onclick = function(e) {
-    let tx=text.innerHTML;
+
+//Работа с innerHTML, замещение
+let pReplace = document.getElementById('replace');
+
+pReplace.onclick = function(e) {
+    let tx=pText.innerHTML;
     tx= tx.replace(/<br>/g,'; ');
-    tx= tx.replace(/РџРѕРіСЂСѓР¶РµРЅРёРµ/g,'->');
-    tx= tx.replace(/Р’СЃРїР»С‹С‚РёРµ/g,'<-');
-    text.innerHTML=tx;
+    tx= tx.replace(/Погружение/g,'->');
+    tx= tx.replace(/Всплытие/g,'<-');
+    pText.innerHTML=tx;
   };
 
-//СЂРµР°Р»РёР·Р°С†РёСЏ passiv true
+//реализация passive true
+let pChange = document.getElementById('change');
 let arxiv= "https://help.yeastar.com/zh-cn/s-series/Images/admin/telephone-keypad.png";
-change.addEventListener("click", function(event) {
-    let z=change_image.src;
-    change_image.src=arxiv;
+
+
+pChange.addEventListener("click", function(event) {
+    let pChangeImg = document.getElementById('change_image');
+    let z=pChangeImg.src;
+    pChangeImg.src=arxiv;
     arxiv=z;
-  
-  }, {passiv: true});
+  }, {passive: true});
 
   </script>
 
