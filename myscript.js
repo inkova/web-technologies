@@ -2,6 +2,10 @@ let newP = document.createElement("p");
 newP.innerHTML ="myscript: start";
 document.body.appendChild(newP);
 
+function talk(){
+	return "myscript return: Myscript is loaded";
+} 
+
 let w1 = new Worker('worker.js');
 
 w1.addEventListener('message',(event)=>{
