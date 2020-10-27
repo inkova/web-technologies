@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Homework 7 (Workers)</title>
+    </head>
+<body>
+<script>
+    let el = document.createElement('script');
+    el.src = 'myscript.js';
+    
+    el.addEventListener("load", function(event) {
+        let newP = document.createElement("p");
+        newP.innerHTML ="html: Myscript is loaded";
+        document.body.appendChild(newP);
+    });  
+
+    document.head.appendChild(el);
+</script>
+
+<table id="idTable">
+    <tr>
+      <th colspan="3">Table:        
+    </th>
+    </tr>
+    <tr>
+      <td><strong>1</strong>
+        <br>.,!
+      </td>
+      <td class="n"><strong>2</strong>
+        <br>ABC
+      </td>
+      <td><strong>3</strong>
+        <br>DEF
+      </td>
+    </tr>
+    <tr>
+      <td><strong>4</strong>
+        <br>GHI
+      </td>
+      <td><strong>5</strong>
+        <br>JKL
+      </td>
+      <td><strong>6</strong>
+        <br>MNO
+      </td>
+    </tr>
+    <tr>
+      <td><strong>7</strong>
+        <br>PQRS
+      </td>
+      <td><strong>8</strong>
+        <br>TUV
+      </td>
+      <td><strong>9</strong>
+        <br>WXYZ
+      </td>
+    </tr>
+
+  </table>
+  <input id="num" type="button" value="My number">
+  </body>
+</html> 
