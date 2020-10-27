@@ -10,5 +10,5 @@ function calc_pi(n){
         current_sum+= 4*(-1)**k/(2*k+1);
     }
 
-    return [Math.floor(current_sum * 10**n) / 10**n,k];
+    return [Math.floor(current_sum * 10**n) / 10**n];
 }
