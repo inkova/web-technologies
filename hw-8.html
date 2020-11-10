@@ -12,8 +12,12 @@
     let newP = document.createElement("p");
     newP.innerHTML = talk.call(self);
     document.body.appendChild(newP);
-
-    import("./myscript.js");
+    import("./myscript.js").then(loadmodule => {
+        let newP = document.createElement("p");
+        newP.innerHTML = loadmodule.default();
+        document.body.appendChild(newP);
+    });
+       
     </script>
 
 <table id="idTable">

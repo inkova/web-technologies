@@ -48,3 +48,8 @@ sw.port.start();
 let newP1 = document.createElement("p");
 newP1.innerHTML ="myscript: end";
 document.body.appendChild(newP1);
+
+export default function(){
+    return 'Myscript on!!!';
+}
+
