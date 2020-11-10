@@ -1,7 +1,10 @@
+import {calc_pi} from "./calc_pi.js"
+import talk from './talk.js';
+
 addEventListener('message',(event)=>{
-    self.importScripts("calc_pi.js");
+    let phrase=talk.call(self);
     let mypi = calc_pi(event.data['n']);
-    postMessage({val: mypi});
+    postMessage({mes: phrase, val: mypi});
 });
 
 

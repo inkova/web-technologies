@@ -12,3 +12,5 @@ function calc_pi(n){
 
     return [Math.floor(current_sum * 10**n) / 10**n];
 }
+
+export {calc_pi};
