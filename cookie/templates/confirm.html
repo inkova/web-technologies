@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    let que_elem = document.getElementById('que');
+    let newP = document.createElement("p");
+    newP.innerHTML = localStorage.getItem("ans_text");
+    que_elem.after(newP);
+
+    let conf = document.getElementById('ok');
+    conf.addEventListener('click',()=>{
+                localStorage.removeItem("ans_text");
+            })
+  },false);
+</script>
+<body>
+  <form action = "/index">
+    <input type="submit" value="back"/>
+  </form>
+  <p>your answer to the question</p>
+  <p id="que">Which method in the flax sets the cookies? What's its syntax?</p>
+  <form action = "/finish">
+    <input id="ok" type="submit" value="finish"/>
+  </form>
+</body>
+</html>
