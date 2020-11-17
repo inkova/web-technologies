@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+   <script>
+document.addEventListener('DOMContentLoaded', function() {
+function getCookie(name) {
+  let matches = document.cookie.match(new RegExp(
+    "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+  ));
+  return matches ? decodeURIComponent(matches[1]) : undefined;
+}
+  let newH = document.createElement("h1");
+  newH.innerHTML = "Welkome, " + getCookie("userID");
+  document.body.before(newH);
+
+  let conf = document.getElementById('ok');
+  let question_elem = document.getElementById('question');
+  conf.addEventListener('click',()=>{
+                localStorage.setItem("ans_text", question_elem.value);
+            })
+  
+  let answer = localStorage.getItem("ans_text");
+  if(answer){question_elem.value = answer;}
+},false);
+
+   </script>
+   <body>
+      <form action = "/getcookie">
+         <p>Which method in the flax sets the cookies? What's its syntax?<p>
+         <p>enter answer<p>
+         <p><input id="question" type = 'text'/></p>
+         <p><input id="ok" type = 'submit' value = 'Next'/></p>
+       </form>
+   </body>
+</html>
