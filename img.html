@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<head>
+    <title>Images</title>
+    <style>
+        img {
+          width:400px; 
+          height:300px;
+        }
+        #rectangles > rect{
+          stroke-width:1.5; 
+          stroke:#000; 
+          y:0;
+          x:0;
+          width:400px; 
+          height:300px;
+        }
+    </style>
+</head>
+<body>
+  <h1>Flags</h1>
+  <img src="https://www.publicdomainpictures.net/pictures/340000/velka/national-flag-of-iceland-themes-idea-design-1588675221wCV.jpg" alt="flag-of-iceland">
+  <img src="test.jpg" alt="flag-of-Madagascar">
+  <svg version="1.1" width="400" height="300" id="Guyana"
+     viewBox="0 -3 400 380" xmlns="http://www.w3.org/2000/svg">
+
+    <g id="rectangles">
+      <rect fill="#7CFC00"/> 
+    </g>
+
+    <g id="paths">
+      <path d="M 0,0 L 0,300 L 400,150 Z" fill="#FFFFFF"/>
+      <path d="M 0,0 L 0,300 L 350,150 Z" fill="yellow"/>
+      <path d="M 0,40 L 0,260 L 150,150 Z" fill="black"/>
+      <path d="M 0,60 L 0,240 L 130,150 Z" fill="red"/>
+    </g>
+  </svg>
+  <svg version="1.1" width="400" height="300" id="my_flag"
+     viewBox="0 -3 400 380" xmlns="http://www.w3.org/2000/svg">
+     
+    <g id="rectangles">
+      <rect fill="#F5F8F3"/> 
+    </g>
+
+    <g id="paths">
+      <path d="M 100,50 C 150,250 200,50 250,250 300,50" stroke-width="5"stroke="black" fill="transparent"/>
+    </g>
+  </svg>
+  <svg width="400" height="300" viewBox="0 0 400 300">
+    <filter id="erode">
+        <feMorphology operator="erode" radius="3"></feMorphology>
+    </filter>
+    <image xlink:href="https://i.artfile.ru/5000x3333_1332806_[www.ArtFile.ru].jpg" width="90%" height="90%" x="10" y="10" filter="url(#erode)"></image>
+  </svg>
+<img src="https://cdn.pixabay.com/photo/2012/04/10/23/21/guatemala-26964_1280.png" alt="flag-of-guatemala" style="filter:url(#erode)">
+</body>
+</html>
