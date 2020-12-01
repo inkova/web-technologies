@@ -26,12 +26,11 @@ function y(x){
 }
 
 function compression(y){
-   let r_y=r;
    let h=height-y; 
 
-   if(h < r/4){coef = 0.25;}
+   if(h < r*3/4){coef = 0.75;}
    else if(h < r){coef = h/r;}
    else{coef = 1;}
 
-   return r_y*= coef;
+   return coef;
 }
