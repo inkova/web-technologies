@@ -24,8 +24,8 @@ function draw(progress) {
     let y_current = y(x_current);
     let inversed_y = 400 - y_current;   
     let coef;
-    let r_x = r;
-    let r_y = compression(y_current);
+    let r_x = r/compression(y_current);
+    let r_y = r*compression(y_current);
 
     draw_svg(x_current, y_current, r_x, r_y);
     draw_canv(x_current, y_current, r_x, r_y);
@@ -50,7 +50,7 @@ function animate({duration, draw, timing}){
 }
 
 animate({
-        duration: 2500,
+        duration: 5000,
         timing: function timing(timeFraction) {
                 return timeFraction;
                 },
