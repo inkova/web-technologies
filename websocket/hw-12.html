@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<head>
+    <title>Web-socet</title>
+</head>
+<body>
+
+  <svg width="400" height="300" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" style="border: 1px solid black">
+  <ellipse cx="50" cy="100" rx="50" ry="50" fill="red" stroke="black" stroke-width="1px"/>
+  </svg>
+
+  <canvas width='400' height=300 style="border: 1px solid black"></canvas>
+
+  <script>
+var ws = new WebSocket("wss://localhost:8080/");
+ws.onopen = function() {
+   ws.send("Hello, world");
+};
+ws.onmessage = function (evt) {
+   alert(evt.data);
+};
+
+</script>
+
+  </body>
+</html>
