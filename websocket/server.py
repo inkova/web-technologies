@@ -2,7 +2,9 @@ import tornado.web
 import tornado.ioloop
 import tornado.websocket
 
-class EchoWebSocket(tornado.websocket.WebSocketHandler):
+
+
+class WSHandler(tornado.websocket.WebSocketHandler):
     def open(self):
         print("WebSocket opened")
 
@@ -11,12 +13,15 @@ class EchoWebSocket(tornado.websocket.WebSocketHandler):
 
     def on_close(self):
         print("WebSocket closed")
-        
+    
+class MainHandler(tornado.web.RequestHandler):
     def get(self):
         self.render('hw-12.html')
-        
+
 application = tornado.web.Application([
-    (r"/", EchoWebSocket)
+    (r'/', MainHandler),
+    (r'/ws', WSHandler),
+    (r'/static/(.*)', tornado.web.StaticFileHandler, {'path': 'static'})
 ])
 
 if __name__ == "__main__":
