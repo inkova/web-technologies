@@ -1,23 +1,38 @@
 <!DOCTYPE html>
 <head>
+    <meta charset="utf-8">
     <title>Web-socet</title>
 </head>
 <body>
-
-  <svg width="400" height="300" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" style="border: 1px solid black">
-  <ellipse cx="50" cy="100" rx="50" ry="50" fill="red" stroke="black" stroke-width="1px"/>
-  </svg>
-
-  <canvas width='400' height=300 style="border: 1px solid black"></canvas>
+  <h1 id="custom">Чехарда</h1>
+  <div id="text">
+  </div>
 
   <script>
-var ws = new WebSocket("ws://localhost:8080/ws");
-ws.onopen = function() {
-   ws.send("Hello, world");
-};
-ws.onmessage = function (evt) {
-   alert(evt.data);
-};
+    let key="next";
+    let i=0;
+    let ws = new WebSocket("ws://localhost:8080/ws");
+
+    let pText = document.getElementById("text");
+
+    function mes(ev) {
+        
+        let newP = document.createElement("p");
+        newP.innerHTML =ev.data;
+        pText.appendChild(newP);
+        if(i<4){ws.send(key);}
+        else{ws.send("stop");}
+        i+=1;
+    }
+
+    function op() {
+        let newH = document.createElement("h2");
+        newH.innerHTML ="Игра началась!";
+        pText.appendChild(newH);
+    }
+
+    ws.addEventListener("message", ev=> mes(ev));
+    ws.addEventListener("open", ev=> op());
 
 </script>
 

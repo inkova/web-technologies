@@ -1,15 +1,31 @@
+import random
 import tornado.web
 import tornado.ioloop
 import tornado.websocket
 
+question =[['Santa claus', 'Snow maiden', 'Snowman', 'Deer', 'Elf', 'Snowflake'],
+           ['at the North Pole', 'in the city', 'in the chimney', 'in a puddle', 'in front of the child', 'on the grass'],
+           ['the day before the new year', 'January 1 morning', 'January 1 morning', 'in summer', 'in the middle of the day', 'in the middle of the day'],
+           ['drank tea', 'in the city', 'shrouded the ground in snow', 'fell into the chimney', 'wished you a happy new year', 'looked at the map'],
+           ['and trumpeted: "yo-ho-ho !!!"', 'and squeaked: "pee-pee ...."', 'and said in surprise: "OH"', 'and said: "And here is a present for you"', 'and shouted: "Happy New Year!"', 'and sang: "Stand up, children, stand in a circle .."']]
+i=-1
+key="next"
+
+def get_word():
+    global i
+    i+=1
+    return random.choice(question[i])
 
 
 class WSHandler(tornado.websocket.WebSocketHandler):
     def open(self):
+        self.write_message(get_word())
         print("WebSocket opened")
 
     def on_message(self, message):
-        self.write_message(u"You said: " + message)
+        if message==key: 
+          phrase=get_word()
+          self.write_message(phrase)
 
     def on_close(self):
         print("WebSocket closed")
