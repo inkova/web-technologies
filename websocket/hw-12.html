@@ -21,7 +21,8 @@
         newP.innerHTML =ev.data;
         pText.appendChild(newP);
         if(i<4){ws.send(key);}
-        else{ws.send("stop");}
+        else if (i==4) {ws.send("stop");}
+        else {ws.send("end");}
         i+=1;
     }
 

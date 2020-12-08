@@ -10,12 +10,15 @@ question =[['Santa claus', 'Snow maiden', 'Snowman', 'Deer', 'Elf', 'Snowflake']
            ['and trumpeted: "yo-ho-ho !!!"', 'and squeaked: "pee-pee ...."', 'and said in surprise: "OH"', 'and said: "And here is a present for you"', 'and shouted: "Happy New Year!"', 'and sang: "Stand up, children, stand in a circle .."']]
 i=-1
 key="next"
+stop="stop"
 
 def get_word():
     global i
     i+=1
     return random.choice(question[i])
 
+def get_bye(wh):
+    wh.write_message("End of the game")
 
 class WSHandler(tornado.websocket.WebSocketHandler):
     def open(self):
@@ -26,6 +29,8 @@ class WSHandler(tornado.websocket.WebSocketHandler):
         if message==key: 
           phrase=get_word()
           self.write_message(phrase)
+        elif message==stop:
+          get_bye(self)
 
     def on_close(self):
         print("WebSocket closed")
@@ -37,7 +42,7 @@ class MainHandler(tornado.web.RequestHandler):
 application = tornado.web.Application([
     (r'/', MainHandler),
     (r'/ws', WSHandler),
-    (r'/static/(.*)', tornado.web.StaticFileHandler, {'path': 'static'})
+    (r'/(.*)', tornado.web.StaticFileHandler, {'path': 'static'})
 ])
 
 if __name__ == "__main__":
