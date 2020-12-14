@@ -27,6 +27,10 @@ def date(d_mm, h_m):
     d = int(d)
     mm = months[mm]
 
+    m_t = datetime.datetime.today().month
+    if mm>m_t:
+        y-=1
+    
     h, m = h_m.split(':')
     h=int(h)
     m=int(m)
